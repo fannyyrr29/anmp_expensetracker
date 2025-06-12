@@ -1,0 +1,29 @@
+package com.ubaya.anmp_expensetracker.viewmodel
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.ubaya.anmp_expensetracker.model.ExpensesDatabase
+import com.ubaya.anmp_expensetracker.model.User
+import com.ubaya.anmp_expensetracker.model.UserDao
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
+
+
+class SignUpViewModel(application:Application):AndroidViewModel(application), CoroutineScope{
+    private val job = Job()
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.IO
+
+
+    fun createAccount(user:User){
+        launch{
+            val db = ExpensesDatabase.buildDatabase(getApplication())
+            db.userDao().insertAll(user)
+        }
+    }
+}
