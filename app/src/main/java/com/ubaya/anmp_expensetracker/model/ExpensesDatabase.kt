@@ -4,16 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import DB_NAME
+import com.ubaya.anmp_expensetracker.util.DB_NAME
 
 
-@Database(entities = arrayOf(User::class), version = 1)
+@Database(entities = arrayOf(User::class, Budget::class, Expense::class), version = 1)
 abstract class ExpensesDatabase:RoomDatabase() {
     abstract fun userDao():UserDao
+    abstract fun BudgetDao():BudgetDao
 
     companion object{
         @Volatile private var instance: ExpensesDatabase ?= null
         private val LOCK = Any()
+
 
         fun buildDatabase(context:Context) = Room.databaseBuilder(
             context.applicationContext,

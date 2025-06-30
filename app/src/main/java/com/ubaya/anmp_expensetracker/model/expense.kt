@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "expenses")
-data class expense(
+data class Expense(
     @ColumnInfo("tanggal")
     var tanggal:Long,
     @ColumnInfo("nominal")

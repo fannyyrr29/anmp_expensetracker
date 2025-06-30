@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/itemBudget">
 
+    <fragment
+        android:id="@+id/itemBudget"
+        android:name="com.ubaya.anmp_expensetracker.view.BudgetFragment"
+        android:label="fragment_budget"
+        tools:layout="@layout/fragment_budget" >
+        <action
+            android:id="@+id/actionAddBudgetFragment"
+            app:destination="@id/addBudgetFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/actionEditBudgetFragment"
+            app:destination="@id/editBudgetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBudgetFragment"
+        android:name="com.ubaya.anmp_expensetracker.view.AddBudgetFragment"
+        android:label="fragment_add_budget"
+        tools:layout="@layout/fragment_add_budget" />
+    <fragment
+        android:id="@+id/editBudgetFragment"
+        android:name="com.ubaya.anmp_expensetracker.view.EditBudgetFragment"
+        android:label="fragment_edit_budget"
+        tools:layout="@layout/fragment_edit_budget" >
+        <argument
+            android:name="uuid"
+            app:argType="integer" />
+    </fragment>
 </navigation>

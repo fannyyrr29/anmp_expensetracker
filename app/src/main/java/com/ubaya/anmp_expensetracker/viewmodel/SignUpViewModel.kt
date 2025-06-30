@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.ubaya.anmp_expensetracker.model.ExpensesDatabase
 import com.ubaya.anmp_expensetracker.model.User
 import com.ubaya.anmp_expensetracker.model.UserDao
+import com.ubaya.anmp_expensetracker.util.buildDb
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -22,7 +23,7 @@ class SignUpViewModel(application:Application):AndroidViewModel(application), Co
 
     fun createAccount(user:User){
         launch{
-            val db = ExpensesDatabase.buildDatabase(getApplication())
+            val db = buildDb(getApplication())
             db.userDao().insertAll(user)
         }
     }
