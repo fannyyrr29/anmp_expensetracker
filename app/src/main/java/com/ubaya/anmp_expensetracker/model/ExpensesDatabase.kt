@@ -11,6 +11,7 @@ import com.ubaya.anmp_expensetracker.util.DB_NAME
 abstract class ExpensesDatabase:RoomDatabase() {
     abstract fun userDao():UserDao
     abstract fun BudgetDao():BudgetDao
+    abstract fun ExpenseDao():ExpenseDao
 
     companion object{
         @Volatile private var instance: ExpensesDatabase ?= null

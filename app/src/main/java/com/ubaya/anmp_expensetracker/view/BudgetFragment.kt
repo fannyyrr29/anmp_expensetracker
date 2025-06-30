@@ -72,8 +72,6 @@ class BudgetFragment : Fragment() {
                 binding.txtError?.visibility = View.VISIBLE
             }
         })
-
-
     }
 
 }

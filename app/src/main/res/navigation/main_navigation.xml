@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/itemBudget">
+    app:startDestination="@id/itemExpense">
 
     <fragment
         android:id="@+id/itemBudget"
@@ -32,4 +32,18 @@
             android:name="uuid"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/itemExpense"
+        android:name="com.ubaya.anmp_expensetracker.view.ExpenseFragment"
+        android:label="fragment_expense"
+        tools:layout="@layout/fragment_expense" >
+        <action
+            android:id="@+id/actionAddExpense"
+            app:destination="@id/addExpenseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addExpenseFragment"
+        android:name="com.ubaya.anmp_expensetracker.view.AddExpenseFragment"
+        android:label="fragment_add_expense"
+        tools:layout="@layout/fragment_add_expense" />
 </navigation>
