@@ -46,4 +46,9 @@
         android:name="com.ubaya.anmp_expensetracker.view.AddExpenseFragment"
         android:label="fragment_add_expense"
         tools:layout="@layout/fragment_add_expense" />
+    <fragment
+        android:id="@+id/itemReport"
+        android:name="com.ubaya.anmp_expensetracker.view.ReportFragment"
+        android:label="fragment_report"
+        tools:layout="@layout/fragment_report" />
 </navigation>

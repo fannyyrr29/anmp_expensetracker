@@ -12,6 +12,7 @@ abstract class ExpensesDatabase:RoomDatabase() {
     abstract fun userDao():UserDao
     abstract fun BudgetDao():BudgetDao
     abstract fun ExpenseDao():ExpenseDao
+    abstract fun ReportDao():ReportDao
 
     companion object{
         @Volatile private var instance: ExpensesDatabase ?= null
