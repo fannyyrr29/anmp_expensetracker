@@ -1,5 +1,6 @@
 package com.ubaya.anmp_expensetracker.view
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -29,12 +30,18 @@ class ReportFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ReportViewModel::class)
-        viewModel.Refresh()
-        binding.recViewReport.layoutManager = LinearLayoutManager(context)
-        binding.recViewReport.adapter = reportAdapter
 
-        observeViewModel()
+        val sharedPref = requireActivity().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val uuid = sharedPref.getString("uuid", null)
+        if (uuid != null){
+            viewModel = ViewModelProvider(this).get(ReportViewModel::class)
+            viewModel.Refresh(uuid.toString().toInt())
+            binding.recViewReport.layoutManager = LinearLayoutManager(context)
+            binding.recViewReport.adapter = reportAdapter
+
+            observeViewModel()
+        }
+
     }
 
     fun observeViewModel(){

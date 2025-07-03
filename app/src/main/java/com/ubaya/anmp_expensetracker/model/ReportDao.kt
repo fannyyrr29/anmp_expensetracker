@@ -7,6 +7,6 @@ import androidx.room.Transaction
 @Dao
 interface ReportDao {
     @Transaction
-    @Query("SELECT * FROM budgets")
-    fun getBudgetWithExpenses(): List<BudgetWithListExpenses>
+    @Query("SELECT * FROM budgets WHERE user_id=:uuid")
+    fun getBudgetWithExpenses(uuid:Int): List<BudgetWithListExpenses>
 }

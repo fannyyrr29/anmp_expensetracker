@@ -50,9 +50,9 @@ class ProfileViewModel(application:Application):AndroidViewModel(application),Pr
                 user.password = txtNewPassword.value
                 db.userDao().updateUser(user)
                 toastMessage.postValue("Password berhasil diganti!")
-                txtOldPassword.value =""
-                txtNewPassword.value = ""
-                txtConfirmPassword.value = ""
+                txtOldPassword.postValue("")
+                txtNewPassword.postValue("")
+                txtConfirmPassword.postValue("")
             }
         }
     }

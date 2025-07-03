@@ -25,13 +25,13 @@ class ReportViewModel(application: Application):AndroidViewModel(application), C
         get() = job + Dispatchers.IO
 
 
-    fun Refresh(){
+    fun Refresh(uuid:Int){
         loadingLD.value = true
         reportErrorLD.value = false
         launch {
             try {
                 val db = buildDb(getApplication())
-                reportLD.postValue(db.ReportDao().getBudgetWithExpenses())
+                reportLD.postValue(db.ReportDao().getBudgetWithExpenses(uuid))
             }catch (e:Exception){
                 reportErrorLD.postValue(true)
             }finally {
