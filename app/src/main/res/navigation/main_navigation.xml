@@ -51,4 +51,9 @@
         android:name="com.ubaya.anmp_expensetracker.view.ReportFragment"
         android:label="fragment_report"
         tools:layout="@layout/fragment_report" />
+    <fragment
+        android:id="@+id/itemProfile"
+        android:name="com.ubaya.anmp_expensetracker.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

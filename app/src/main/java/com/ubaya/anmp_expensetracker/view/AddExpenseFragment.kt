@@ -61,6 +61,9 @@ class AddExpenseFragment : Fragment() {
 
                         viewModel.usedBudget.observe(viewLifecycleOwner) { used ->
                             binding.txtUsed.text = formatRupiah(used)
+
+                            val remainder = selectedBudget.nominal - used
+                            binding.txtExpenseNominal.setHint("Nominal: ${formatRupiah(remainder)} left")
                         }
                         viewModel.updateProgressBar(selectedBudget.uuid, selectedBudget.nominal.toDouble())
                         viewModel.percentUsedLD.observe(viewLifecycleOwner) { percent ->
@@ -71,7 +74,7 @@ class AddExpenseFragment : Fragment() {
                             val nominal = binding.txtExpenseNominal.text.toString().toDoubleOrNull() ?: 0.0
                             val note = binding.txtNote.text.toString()
                             val currentTime = System.currentTimeMillis()
-                            if (viewModel.usedBudget.value <= selectedBudget.nominal){
+                            if (viewModel.usedBudget.value + nominal <= selectedBudget.nominal){
                                 val expense = Expense(tanggal = currentTime, nominal = nominal, notes = note, budget_id = selectedBudget.uuid  )
                                 viewModel.addExpense(expense)
                                 Toast.makeText(context, "Expense has sucessfully inputted!", Toast.LENGTH_LONG).show()

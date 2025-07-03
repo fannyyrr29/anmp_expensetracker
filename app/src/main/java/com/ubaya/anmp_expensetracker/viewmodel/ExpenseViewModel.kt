@@ -1,6 +1,7 @@
 package com.ubaya.anmp_expensetracker.viewmodel
 
 import android.app.Application
+import android.content.Context.MODE_PRIVATE
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -42,13 +43,13 @@ class ExpenseViewModel(application: Application):AndroidViewModel(application), 
         }
     }
 
-    fun Refresh(){
+    fun Refresh(uuid:Int){
         loadingLD.value = true
         expenseLoadErrorLD.value = false
         launch {
             try {
                 val db = ExpensesDatabase.buildDatabase(getApplication())
-                expenseLD.postValue(db.ExpenseDao().selectAll())
+                expenseLD.postValue(db.ExpenseDao().selectAll(uuid))
 
             }catch (e: Exception){
                 expenseLoadErrorLD.postValue(true)
@@ -68,7 +69,8 @@ class ExpenseViewModel(application: Application):AndroidViewModel(application), 
     fun selectBudget(){
         launch {
             val db = buildDb(getApplication())
-            budgetLD.postValue(db.BudgetDao().selectAllBudget())
+            val uuid = getUuidFromPref()?.toIntOrNull() ?: 0
+            budgetLD.postValue(db.BudgetDao().selectAllBudget(uuid))
 
 
         }
@@ -90,5 +92,11 @@ class ExpenseViewModel(application: Application):AndroidViewModel(application), 
 
         }
     }
+
+    private fun getUuidFromPref(): String {
+        val pref = getApplication<Application>().getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+        return pref.getString("uuid", null) ?: ""
+    }
+
 
 }

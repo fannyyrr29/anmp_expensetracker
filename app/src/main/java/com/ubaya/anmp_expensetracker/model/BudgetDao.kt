@@ -13,8 +13,8 @@ interface BudgetDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg budget: Budget)
 
-    @Query("SELECT * FROM budgets")
-    fun selectAllBudget():List<Budget>
+    @Query("SELECT * FROM budgets WHERE user_id=:id")
+    fun selectAllBudget(id:Int):List<Budget>
 
     @Query("SELECT * FROM budgets WHERE uuid=:uuid")
     fun selectBudget(uuid:Int):Budget
@@ -24,4 +24,7 @@ interface BudgetDao {
 
     @Delete
     fun deleteBudget(budget: Budget)
+
+    @Query("SELECT SUM(nominal) FROM expenses WHERE budget_id = :budgetId")
+    fun getTotalExpenseForBudget(budgetId: Int): Double?
 }

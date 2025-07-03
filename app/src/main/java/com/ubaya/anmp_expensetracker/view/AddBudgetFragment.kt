@@ -38,12 +38,19 @@ class AddBudgetFragment : Fragment() {
         val user_id = prefs.getString("uuid", null)
 
         binding.btnAddBudget.setOnClickListener {
-            val budget = Budget(
-                binding.txtBudgetName.text.toString(),
-                binding.txtNominal.text.toString().toInt(),
-                user_id!!.toInt()
-            )
-            viewModel.AddBudget(budget)
+            if (binding.txtBudgetName.text.toString() == "" || binding.txtNominal.text.toString() == "" || binding.txtNominal.text.toString().toInt()<=0 ){
+                Toast.makeText(requireContext(), "Budget Name and Nominal cannot be empty!", Toast.LENGTH_SHORT).show()
+
+            }
+            else{
+                val budget = Budget(
+                    binding.txtBudgetName.text.toString(),
+                    binding.txtNominal.text.toString().toInt(),
+                    user_id!!.toInt()
+                )
+                viewModel.AddBudget(budget)
+            }
+
         }
 
         viewModel.insertSuccess.observe(viewLifecycleOwner) { success ->

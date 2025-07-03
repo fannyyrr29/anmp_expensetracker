@@ -1,5 +1,6 @@
 package com.ubaya.anmp_expensetracker.view
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -38,16 +39,23 @@ class ExpenseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(ExpenseViewModel::class)
 
-        viewModel.Refresh()
-        binding.expenseRecView.layoutManager = LinearLayoutManager(context)
-        binding.expenseRecView.adapter = expenseAdapter
+        val sharedPref = requireActivity().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val uuid = sharedPref.getString("uuid", null)
 
-        binding.btnAddExpense.setOnClickListener {
-            val action = ExpenseFragmentDirections.actionAddExpense()
-            Navigation.findNavController(it).navigate(action)
+        if (uuid != null){
+            viewModel.Refresh(uuid.toString().toInt())
+            binding.expenseRecView.layoutManager = LinearLayoutManager(context)
+            binding.expenseRecView.adapter = expenseAdapter
+
+            binding.btnAddExpense.setOnClickListener {
+                val action = ExpenseFragmentDirections.actionAddExpense()
+                Navigation.findNavController(it).navigate(action)
+            }
+
+            observeViewModel()
+
+
         }
-
-        observeViewModel()
 
     }
 

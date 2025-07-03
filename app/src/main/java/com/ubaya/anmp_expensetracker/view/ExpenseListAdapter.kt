@@ -35,6 +35,7 @@ class ExpenseListAdapter(val expenseList: ArrayList<ExpenseWithBudget>): Recycle
         holder.binding.txtTanggal.text = formatDate(expenseList[position].expense.tanggal)
         holder.binding.chipBudget.text = expenseList[position].budget.name
         holder.binding.txtHarga.text = formatRupiah(expenseList[position].expense.nominal)
+//        Log.d("expense", "${formatRupiah(expenseList[position].expense.nominal)}")
 
         holder.binding.txtHarga.setOnClickListener {
             val dialogView = LayoutInflater.from(holder.itemView.context)

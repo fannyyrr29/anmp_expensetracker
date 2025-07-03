@@ -28,15 +28,20 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
+        viewModel.toastMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            if(it.contains("berhasil")){
+                Navigation.findNavController(view).popBackStack()
 
+            }
+        }
         binding.btnCreateAccount.setOnClickListener {
             if (binding.textPassword.text.toString() == binding.textRepeatPassword.text.toString()){
                 var user = User(
                     binding.textUsername.text.toString(), binding.textFirstName.text.toString(), binding.textLastname.text.toString(), binding.textPassword.text.toString()
                 )
                 viewModel.createAccount(user)
-                Toast.makeText(view.context, "Account has been created!", Toast.LENGTH_LONG).show()
-                Navigation.findNavController(it).popBackStack()
+                //Toast.makeText(view.context, "Account has been created!", Toast.LENGTH_LONG).show()
             }else{
                 Toast.makeText(view.context, "Password and Repeat Password is not match", Toast.LENGTH_LONG).show()
             }

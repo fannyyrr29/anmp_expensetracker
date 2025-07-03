@@ -10,8 +10,8 @@ interface ExpenseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg expense: Expense)
 
-    @Query("SELECT * FROM expenses")
-    fun selectAll(): List<ExpenseWithBudget>
+    @Query("SELECT e.* FROM expenses AS e INNER JOIN budgets AS b ON e.budget_id = b.uuid WHERE b.user_id=:user_id")
+    fun selectAll(user_id:Int): List<ExpenseWithBudget>
 
     @Query("SELECT * FROM expenses WHERE uuid=:uuid")
     fun selectExpense(uuid: Int):Expense

@@ -37,6 +37,13 @@ class EditBudgetFragment : Fragment() {
         binding.txtBudgetTitle.text = "Edit Budget"
         binding.btnAddBudget.text = "Save Changes"
 
+        viewModel.toastMessage.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            if (it.contains("Budget berhasil diupdate")) {
+                Navigation.findNavController(view).popBackStack()
+            }
+        }
+
         binding.btnAddBudget.setOnClickListener {
             // Misalnya di dalam Fragment
             val sharedPref = requireActivity().getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
@@ -44,8 +51,7 @@ class EditBudgetFragment : Fragment() {
 
             if (user_id != null) {
                 viewModel.update(binding.txtBudgetName.text.toString(), binding.txtNominal.text.toString().toDouble(), user_id.toInt(), uuid )
-                Toast.makeText(context, "Budget berhasil diupdate", Toast.LENGTH_SHORT).show()
-                Navigation.findNavController(it).popBackStack()
+                //Toast.makeText(context, "Budget berhasil diupdate", Toast.LENGTH_SHORT).show()
             }else{
                 Toast.makeText(context, "User Tidak Ditemukan", Toast.LENGTH_SHORT).show()
             }

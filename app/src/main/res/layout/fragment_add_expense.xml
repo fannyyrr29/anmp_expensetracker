@@ -109,11 +109,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progressBarExpense">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <EditText
                 android:id="@+id/txtExpenseNominal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nominal (IDR Left)" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Nominal"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

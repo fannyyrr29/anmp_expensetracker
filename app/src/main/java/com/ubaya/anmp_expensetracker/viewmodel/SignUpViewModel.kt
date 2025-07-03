@@ -17,6 +17,7 @@ import kotlin.coroutines.CoroutineContext
 
 class SignUpViewModel(application:Application):AndroidViewModel(application), CoroutineScope{
     private val job = Job()
+    val toastMessage = MutableLiveData<String>()
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.IO
 
@@ -24,7 +25,15 @@ class SignUpViewModel(application:Application):AndroidViewModel(application), Co
     fun createAccount(user:User){
         launch{
             val db = buildDb(getApplication())
-            db.userDao().insertAll(user)
+            val usercheck = db.userDao().checkUsername(user.username)
+            if (usercheck!=null){
+                toastMessage.postValue("Username sudah dipakai!")
+            }
+            else{
+                toastMessage.postValue("Akun berhasil dibuat!")
+                db.userDao().insertAll(user)
+            }
+
         }
     }
 }
