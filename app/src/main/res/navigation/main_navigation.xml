@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/itemBudget"
         android:name="com.ubaya.anmp_expensetracker.view.BudgetFragment"
-        android:label="fragment_budget"
-        tools:layout="@layout/fragment_budget" >
+        android:label="Budget"
+        tools:layout="@layout/fragment_budget">
         <action
             android:id="@+id/actionAddBudgetFragment"
             app:destination="@id/addBudgetFragment"
@@ -21,13 +21,13 @@
     <fragment
         android:id="@+id/addBudgetFragment"
         android:name="com.ubaya.anmp_expensetracker.view.AddBudgetFragment"
-        android:label="fragment_add_budget"
+        android:label="Add Budget"
         tools:layout="@layout/fragment_add_budget" />
     <fragment
         android:id="@+id/editBudgetFragment"
         android:name="com.ubaya.anmp_expensetracker.view.EditBudgetFragment"
-        android:label="fragment_edit_budget"
-        tools:layout="@layout/fragment_edit_budget" >
+        android:label="Edit Budget"
+        tools:layout="@layout/fragment_edit_budget">
         <argument
             android:name="uuid"
             app:argType="integer" />
@@ -35,8 +35,8 @@
     <fragment
         android:id="@+id/itemExpense"
         android:name="com.ubaya.anmp_expensetracker.view.ExpenseFragment"
-        android:label="fragment_expense"
-        tools:layout="@layout/fragment_expense" >
+        android:label="Expense Tracker"
+        tools:layout="@layout/fragment_expense">
         <action
             android:id="@+id/actionAddExpense"
             app:destination="@id/addExpenseFragment" />
@@ -44,16 +44,16 @@
     <fragment
         android:id="@+id/addExpenseFragment"
         android:name="com.ubaya.anmp_expensetracker.view.AddExpenseFragment"
-        android:label="fragment_add_expense"
+        android:label="New Expense"
         tools:layout="@layout/fragment_add_expense" />
     <fragment
         android:id="@+id/itemReport"
         android:name="com.ubaya.anmp_expensetracker.view.ReportFragment"
-        android:label="fragment_report"
+        android:label="Report"
         tools:layout="@layout/fragment_report" />
     <fragment
         android:id="@+id/itemProfile"
         android:name="com.ubaya.anmp_expensetracker.view.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
